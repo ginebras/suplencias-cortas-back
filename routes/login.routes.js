@@ -25,7 +25,12 @@ router.post('/login',(req,res)=>{
 })
 
 router.post('/verifyToken',verifyToken,(req,res)=>{
-    
+    const user=req.user.username
+
+    connection.query(`SELECT * FROM usuario WHERE username='${user}'`,(err,result)=>{
+        if(err) return res.status(500).send(err)
+        else return res.status(200).send(result)
+    })
 })
 
 module.exports=router
