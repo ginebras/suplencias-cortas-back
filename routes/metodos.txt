@@ -1,0 +1,13 @@
+> Se da de baja a un docente de un cargo(con el codigo de materia)
+> se crea un cargo vacante con el codigo de materia  
+> se envia la materia mediante su codigo en el cargo vacante y se muestra en la tabla 
+> se busca candidatos
+
+
+
+
+> se toma el id del cargo a cubrir 
+> se toman los datos del curso mediante la materia
+> se crea una asignacion del cargo 
+> se crea un registro en el respectivo historial
+> 

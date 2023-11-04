@@ -21,4 +21,6 @@ app.use('/api/candidatos',require('./routes/historialcandidatos.routes'))
 app.use('/api/materias',require('./routes/materia.route'))                          
 app.use('/api/nomenclador',require('./routes/nomenclador.routes'))                          
 
+app.use('/api/metodos',require('./routes/methods.routes'))
+
 module.exports=app
