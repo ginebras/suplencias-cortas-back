@@ -1,5 +1,4 @@
 const router=require('express').Router()
-const { response } = require('../app')
 const connection=require('../db')
 
 router.post('/dar-de-baja-cargo/:id',(req,res)=>{

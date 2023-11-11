@@ -1,4 +1,5 @@
 const jwt=require('jsonwebtoken')
+const expressJwt=require('express-jwt');
 
 const verifyToken=(req,res,next)=>{
     const tokenHeader=req.header('Authorization')
@@ -13,5 +14,16 @@ const verifyToken=(req,res,next)=>{
         return res.status(401).send('Token no autenticada')
     }
 }
+const authJwt=()=>{
+	return expressJwt({
+		secret:process.env.SECRET,
+		algorithms:['HS256'],
+	}).unless({
+		path:[
+			{ url:/\/api\/auth(.*)/ ,methods:['GET','POST','PUT','DELETE','OPTIONS']},
+			
+		]
+	})
+}
 
-module.exports={verifyToken}
+module.exports={verifyToken,authJwt}

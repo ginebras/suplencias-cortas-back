@@ -2,11 +2,11 @@ const app=require("./app")
 const mysql=require('mysql2')
 
 const connection = mysql.createConnection({
-    host:'localhost',
-    port:3306,
-    database:'SuplenciasCortas',
-    user:'root',
-    password:'45782694Alejo'
+    host:process.env.HOST_MYSQL,
+    port:process.env.PORT_MYSQL,
+    database:process.env.DATABASE_MYSQL,
+    user:process.env.USER_MYSQL,
+    password:process.env.PASSWORD_MYSQL
 })
 
 connection.connect((err)=>{
