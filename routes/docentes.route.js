@@ -6,7 +6,7 @@ router.post('/create-docente',(req,res)=>{
 
     console.log(docente)
 
-    connection.query('INSERT INTO Docentes(nombreDocente,apellidoDocente,emailDocente,telefonoDocente,antiguedadEscolar,antiguedadDocencia,legajo,DNIdocente,cuilDocente,calleDocente,localidad,alturaDocente,PIDtitular,nacimientoDocente) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',docente,(err,result)=>{
+    connection.query('INSERT INTO Docentes(IDdocente,nombre,cuil,FOJA,actoAdministrativo,fechaNacimiento,primeraToma,tomaPosesion,asignaturasSiglas,asignaturasFull,curso,especialidad,PID,titulo,cese,domicilio,contacto,turno,suplido,cantidadHoras,LUNES,MARTES,MIERCOLES,JUEVES,VIERNES) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',docente,(err,result)=>{
         if(err){
             console.log('Error al insertar registro en MySQL en tabla docentes: '+err.message)
             res.status(500).send('Error al insertar',err)

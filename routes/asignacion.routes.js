@@ -1,15 +1,18 @@
 const router  = require("express").Router();
 const connection = require("../db");
 
-router.post('/create-asignacion',(req,res)=>{
+router.post('/create-asignacion',async (req,res)=>{
     const asignacion=Object.values(req.body)
 
-    connection.query(`INSERT INTO Asignacion(IDcurso,IDasignacionVac,fechaAsignada,tipoSuplencia,inicioSuplencia,finSuplencia,IDdocente) VALUES(?,?,?,?,?,?,?)`,asignacion,(err,result)=>{
-        if(err) res.status(500).send("Error al insertar registro en tabla Asignacion",err.message)
-        else res.status(200).send(result)
-    })
+    try{
+        await connection.query(`INSERT INTO Asignacion(IDcurso,IDasignacionVac,fechaAsignada,tipoSuplencia,inicioSuplencia,finSuplencia,IDdocente) VALUES(?,?,?,?,?,?,?)`,asignacion,(err,result)=>{
+            if(err) res.status(500).send("Error al insertar registro en tabla Asignacion",err.message)
+            else res.status(200).send(result)
+        })
+    }catch(err){
+        console.log("Catch: "+err)
+    }
 })
-
 
 router.get('/asignaciones',(req,res)=>{
     

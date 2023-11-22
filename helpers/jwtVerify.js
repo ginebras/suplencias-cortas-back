@@ -14,6 +14,9 @@ const verifyToken=(req,res,next)=>{
         return res.status(401).send('Token no autenticada')
     }
 }
+
+//ADMIN DIRE,SECRES,VICEDIRES
+//SEMIN ADMIN PRECES ADMINISTRATIVOS
 const authJwt=()=>{
 	return expressJwt({
 		secret:process.env.SECRET,
