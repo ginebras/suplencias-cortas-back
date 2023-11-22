@@ -17,6 +17,26 @@ const verifyToken=(req,res,next)=>{
 
 //ADMIN DIRE,SECRES,VICEDIRES
 //SEMIN ADMIN PRECES ADMINISTRATIVOS
+const verifyAndAuthorizeToken=(req,res,next)=>{
+	verifyToken(req,res,()=>{
+		if(req.user.userId===req.params.id || req.user.isAdmin){
+			next()
+		}else{
+			res.status(403).send('not allowed');
+		}
+	})
+}
+
+const verifyAdmin=(req,res,next)=>{
+	verifyToken(req,res,()=>{
+		if(req.user.isAdmin){
+			next()
+		}else{
+			res.status(403).send('not allowed');
+		}
+	})
+}
+
 const authJwt=()=>{
 	return expressJwt({
 		secret:process.env.SECRET,
@@ -29,4 +49,4 @@ const authJwt=()=>{
 	})
 }
 
-module.exports={verifyToken,authJwt}
+module.exports={verifyToken,verifyAndAuthorizeToken,verifyAdmin,authJwt}
