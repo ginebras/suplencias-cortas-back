@@ -1,13 +1,29 @@
-> Se da de baja a un docente de un cargo(con el codigo de materia)
-> se crea un cargo vacante con el codigo de materia  
-> se envia la materia mediante su codigo en el cargo vacante y se muestra en la tabla 
-> se busca candidatos
+const profesores = [
+  { nombre: 'Profesor1', puntaje: 85, antiguedad_escuela: 3, antiguedad_docente: 5 },
+  { nombre: 'Profesor2', puntaje: 78, antiguedad_escuela: 2, antiguedad_docente: 8 },
+  // profesores de ejemplo
+];
 
+// Pesos para cada prioridad
+const pesoPuntaje = 3;
+const pesoAntiguedadEscuela = 2;
+const pesoAntiguedadDocente = 1;
 
+// Calcular puntaje total para cada profesor
+const profesoresConPuntajes = profesores.map((profesor) => ({
+  ...profesor,
+  puntaje_total:
+    profesor.puntaje * pesoPuntaje +
+    profesor.antiguedad_escuela * pesoAntiguedadEscuela +
+    profesor.antiguedad_docente * pesoAntiguedadDocente,
+}));
 
+// Ordenar la lista de profesores por puntaje total de mayor a menor
+profesoresConPuntajes.sort((a, b) => b.puntaje_total - a.puntaje_total);
 
-> se toma el id del cargo a cubrir 
-> se toman los datos del curso mediante la materia
-> se crea una asignacion del cargo 
-> se crea un registro en el respectivo historial
-> 
+// Seleccionar a los mejores profesores
+const numProfesoresSeleccionados = 5;
+const mejoresProfesores = profesoresConPuntajes.slice(0, numProfesoresSeleccionados);
+
+// Imprimir los mejores profesores
+console.log(mejoresProfesores);

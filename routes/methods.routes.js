@@ -13,8 +13,25 @@ router.post('/dar-de-baja-cargo/:id',(req,res)=>{
 
             connection.query("INSERT INTO cargovacante(codigoMateria,turnoCargoVac,horarioCargoVac) VALUES(?,?,?)",cargo,(error2,inserted)=>{
                 if(error2) res.status(500).send(error2)
-                return res.status(200).send(inserted)
-                //FALTA CONTINUAR PARA BUSCAR CANDIDATOS
+                
+                connection.query('SELECT * FROM docentes',(errDocentes,resultDocentes)=>{
+                    if(errDocentes) res.status(500).send(errDocentes)
+                    const pesoPuntaje = 3;
+                    const pesoAntiguedadEscuela = 2;
+                    const pesoAntiguedadDocente = 1;
+
+                    const profesoresConPuntajes = resultDocentes.map((profesor) => ({
+                        ...profesor,
+                        puntaje_total:
+                          profesor.puntaje * pesoPuntaje +
+                          profesor.antiguedad_escuela * pesoAntiguedadEscuela +
+                          profesor.antiguedad_docente * pesoAntiguedadDocente,
+                      }));
+
+                    const numProfesoresSeleccionados = 5;
+                    const mejoresProfesores = profesoresConPuntajes.slice(0, numProfesoresSeleccionados);
+                    console.log(profesoresConPuntajes)
+                })
             })
         })
     })
